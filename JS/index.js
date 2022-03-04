@@ -3,15 +3,15 @@
 function myPow(base, exponent) {
   //
   if (!Number.isInteger(base, exponent)) {
-    throw new RangeError("must be integer value");
+    throw new RangeError("value must be integer value");
   }
 
-  if (typeof base !== "number" && exponent !== "number") {
-    throw new TypeError("must be number");
+  if (typeof base !== "number" || typeof exponent !== "number") {
+    throw new TypeError("value must be number");
   }
 
   if (base < 0 || !Number.isSafeInteger(base)) {
-    throw new Error("must be not negative safe int value");
+    throw new Error(" must be not negative safe int value");
   }
 
   //
@@ -21,9 +21,15 @@ function myPow(base, exponent) {
 }
 
 try {
-  console.log(" :>> ", myPow(3, 4));
+  console.log(" :>> ", myPow(2, ""));
 } catch (err) {
-  console.log("err :>> ", err);
+  if (err instanceof RangeError) {
+    console.log("RangeError :>> value must be integer value ");
+  } else if (err instanceof TypeError) {
+    console.log("TypeError :>> value must be number ");
+  } else if (err instanceof Error) {
+    console.log("Error :>> must be not negative safe int value ");
+  }
 }
 
-console.log("end script ");
+console.log("finish");
